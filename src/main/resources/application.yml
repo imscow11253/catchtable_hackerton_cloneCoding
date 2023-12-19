@@ -4,19 +4,18 @@ spring:
       "local": "localDB, devPort, secret, web-mvc"
       "dev": "devDB, devPort, secret, web-mvc"
       "prod": "prodDB, prodPort, secret, web-mvc"
-    active: local
-
 
 ---
+
 spring:
   config:
     activate:
       on-profile: "localDB"
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ct_db
-    username: root
-    password: madpotato0606
+    url: ${DATASOURCE_URL_LOCAL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     dbcp2:
       validation-query: select 1
@@ -107,6 +106,4 @@ spring:
 
   messages:
     basename: errors
-
-
 

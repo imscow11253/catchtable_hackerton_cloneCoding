@@ -25,12 +25,13 @@ public class ReservationDao {
 
     public List<Integer> getAvailableTimeforDay(Integer restaurant_id, Date date) {
         String sql = "SELECT t.time " +
-                "FROM time t" +
+                "FROM time t " +
                 "INNER JOIN reservation_day rd ON t.day_id = rd.day_id " +
-                "WHERE rd.restaurant_id=:restaurant_id " +
-                "  AND rd.day=:date " +
-                "  AND t.is_reservation='NO';";
-        List<Timestamp> timestampList = jdbcTemplate.queryForList(sql, Timestamp.class);
+                "WHERE rd.restaurant_id=? " +
+                "AND rd.day=? " +
+                "AND t.is_reservation='YES'";
+        List<Timestamp> timestampList = jdbcTemplate.queryForList(sql, Timestamp.class,restaurant_id, date);
+
         // Stream을 사용하여 List<Timestamp>를 List<Integer>으로 변환
         List<Integer> hours = timestampList.stream()
                 .map(timestamp -> {
@@ -74,7 +75,7 @@ public class ReservationDao {
     public int[] getListOfTime(long day_id, int reservation_people) {
         log.info("Reservation.getListOfAvailableDay");
 
-        String sql = "SELECT time FROM time WHERE day_id=? AND people_num>=?";
+        String sql = "SELECT time FROM time WHERE day_id=? AND people_num>=? AND is_reservation='YES'";
         List<Timestamp> timestampList = this.jdbcTemplate.queryForList(sql, Timestamp.class, day_id, reservation_people);
         /*for(Timestamp a : timestampList){
             log.info("logis" + a.toString());
