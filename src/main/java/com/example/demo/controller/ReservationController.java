@@ -56,6 +56,6 @@ public class ReservationController {
             }
         }
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ", ""));
-        return new BaseResponse<>(new ReservationCreateResponse(1));
+        return new BaseResponse<>(reservationService.createReservation(userId, requestBody));
     }
 }

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -68,5 +69,10 @@ public class ReservationService {
         }
     }
 
-//    public ReservationCreateResponse createReservation()
+    public ReservationCreateResponse createReservation(Long userId, PostReservationCreateRequest requestBody){
+        Date sqlDate = Date.valueOf(requestBody.getVisit_date());
+        Time sqlTime = Time.valueOf(requestBody.getVisit_time());
+        Integer reservation_id = reservationDao.saveReservation(userId, requestBody.getRestaurant_id(), sqlDate, sqlTime, requestBody.getNumber_of_people(), requestBody.getCosumer_memo());
+        return new ReservationCreateResponse(reservation_id);
+    }
 }
