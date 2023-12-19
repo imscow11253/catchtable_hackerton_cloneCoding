@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.response.BaseResponse;
+import com.example.demo.dto.restaurant.GetRestaurantDetail;
 import com.example.demo.dto.restaurant.GetRestaurantResponseCategory;
 import com.example.demo.dto.restaurant.GetRestaurantResponseLocation;
 import com.example.demo.service.RestaurantService;
@@ -36,5 +37,14 @@ public class RestaurantController {
         log.info("[RestaurantController.getRestaurants_Location]");
 
         return new BaseResponse<>(restaurantService.getRestaurantListLocation(location, pageId));
+    }
+
+    @GetMapping("")
+    public BaseResponse<GetRestaurantDetail> getRestaurantDetail(
+            @RequestParam(name = "restaurant_id", required = false, defaultValue = "") int restaurant_id
+    ){
+        log.info("[RestaurantController.getRestaurants_Detail]");
+
+        return new BaseResponse<>(restaurantService.getRestaurantDetail(restaurant_id));
     }
 }

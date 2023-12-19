@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.RestaurantDao;
+import com.example.demo.dto.restaurant.GetRestaurantDetail;
 import com.example.demo.dto.restaurant.GetRestaurantResponseCategory;
 import com.example.demo.dto.restaurant.GetRestaurantResponseLocation;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,10 @@ public class RestaurantService {
     public GetRestaurantResponseLocation getRestaurantListLocation(String location, int pageId){
         log.info("[RestaurantService.getRestaurantListLocation]");
         return restaurantDao.getRestaurantlistLocation(location, pageId);
+    }
+
+    public GetRestaurantDetail getRestaurantDetail(int restaurant_id){
+        log.info("[RestaurantService.getRestaurantListDetail]");
+        return restaurantDao.getRestaurantDetail(restaurant_id);
     }
 }
