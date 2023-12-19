@@ -24,7 +24,6 @@ public class ReservationDao {
                 "  AND rd.day=:date " +
                 "  AND t.is_reservation='NO';";
         List<Timestamp> timestampList = jdbcTemplate.queryForList(sql, Timestamp.class);
-
         // Stream을 사용하여 List<Timestamp>를 List<Integer>으로 변환
         List<Integer> hours = timestampList.stream()
                 .map(timestamp -> {

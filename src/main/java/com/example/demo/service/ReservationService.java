@@ -33,5 +33,5 @@ public class ReservationService {
         return new ReservationDayResponse(reservationDao.getAvailableTimeforDay(restaurant_id, date));
     }
 
-    public ReservationCreateResponse createReservation()
+//    public ReservationCreateResponse createReservation()
 }

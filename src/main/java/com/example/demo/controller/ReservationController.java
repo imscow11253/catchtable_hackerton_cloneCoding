@@ -1,22 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.base.BaseExceptionResponse;
 import com.example.demo.dto.base.BaseResponse;
 import com.example.demo.dto.reservation.PostReservationCreateRequest;
 import com.example.demo.dto.reservation.ReservationCreateResponse;
 import com.example.demo.dto.reservation.ReservationDayResponse;
 import com.example.demo.exception.BaseException;
 import com.example.demo.service.ReservationService;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 import static com.example.demo.dto.base.BaseExceptionResponseStatus.*;
 
@@ -42,12 +35,12 @@ public class ReservationController {
         return new BaseResponse<>(response);
     }
 
-    @PostMapping
-    public BaseResponse<ReservationCreateResponse> createReservation(@RequestBody PostReservationCreateRequest, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            if (bindingResult.hasErrors()){
-                throw new BaseException(BAD_FIELD_RESERVATION_CREATE_ERROR);
-            }
-        }
-    }
+//    @PostMapping
+//    public BaseResponse<ReservationCreateResponse> createReservation(@RequestBody PostReservationCreateRequest, BindingResult bindingResult){
+//        if (bindingResult.hasErrors()){
+//            if (bindingResult.hasErrors()){
+//                throw new BaseException(BAD_FIELD_RESERVATION_CREATE_ERROR);
+//            }
+//        }
+//    }
 }
