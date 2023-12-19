@@ -13,8 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetRestaurantResponse {
-    List<RestaurantInformation> restaurant_list = new ArrayList<>();
+public class GetRestaurantResponseCategory {
+    List<RestaurantInformationCategory> restaurant_list = new ArrayList<>();
     int has_next;
     int cur_page;
 }

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.response.BaseResponse;
-import com.example.demo.dto.restaurant.GetRestaurantResponse;
-import com.example.demo.dto.restaurant.RestaurantInformation;
+import com.example.demo.dto.restaurant.GetRestaurantResponseCategory;
+import com.example.demo.dto.restaurant.GetRestaurantResponseLocation;
 import com.example.demo.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/restaurants")
@@ -20,7 +18,7 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
     @GetMapping("/categories")
-    public BaseResponse<GetRestaurantResponse> getRestaurantsCategory(
+    public BaseResponse<GetRestaurantResponseCategory> getRestaurantsCategory(
             @RequestParam(name = "category", required = false, defaultValue = "") String category,
             @RequestParam(name = "pageId", required = false, defaultValue = "") int pageId) {
         log.info(category);
@@ -28,6 +26,15 @@ public class RestaurantController {
 //        if (!status.equals("active") && !status.equals("dormant") && !status.equals("deleted")) {
 //            throw new UserException(INVALID_USER_STATUS);
 //        }
-        return new BaseResponse<>(restaurantService.getRestaurantList(category, pageId));
+        return new BaseResponse<>(restaurantService.getRestaurantListCategory(category, pageId));
+    }
+
+    @GetMapping("/locations")
+    public BaseResponse<GetRestaurantResponseLocation> getRestaurantLocation(
+            @RequestParam(name = "location", required = false, defaultValue = "") String location,
+            @RequestParam(name = "pageId", required = false, defaultValue = "") int pageId){
+        log.info("[RestaurantController.getRestaurants_Location]");
+
+        return new BaseResponse<>(restaurantService.getRestaurantListLocation(location, pageId));
     }
 }

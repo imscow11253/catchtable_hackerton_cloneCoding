@@ -1,21 +1,24 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.RestaurantDao;
-import com.example.demo.dto.restaurant.GetRestaurantResponse;
-import com.example.demo.dto.restaurant.RestaurantInformation;
+import com.example.demo.dto.restaurant.GetRestaurantResponseCategory;
+import com.example.demo.dto.restaurant.GetRestaurantResponseLocation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class RestaurantService {
     private final RestaurantDao restaurantDao;
-    public GetRestaurantResponse getRestaurantList(String category, int pageId) {
+    public GetRestaurantResponseCategory getRestaurantListCategory(String category, int pageId) {
         log.info("[RestaurantService.getRestaurantList]");
-        return restaurantDao.getRestaurantlist(category, pageId);
+        return restaurantDao.getRestaurantlistCategory(category, pageId);
+    }
+
+    public GetRestaurantResponseLocation getRestaurantListLocation(String location, int pageId){
+        log.info("[RestaurantService.getRestaurantListLocation]");
+        return restaurantDao.getRestaurantlistLocation(location, pageId);
     }
 }
