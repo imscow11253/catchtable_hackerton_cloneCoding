@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.ReservationDao;
+import com.example.demo.dto.reservation.ReservationCreateResponse;
 import com.example.demo.dto.reservation.ReservationDayResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,6 @@ public class ReservationService {
 
         return new ReservationDayResponse(reservationDao.getAvailableTimeforDay(restaurant_id, date));
     }
+
+    public ReservationCreateResponse createReservation()
 }

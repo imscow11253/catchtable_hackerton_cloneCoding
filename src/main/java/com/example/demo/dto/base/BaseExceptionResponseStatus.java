@@ -24,6 +24,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
 //    SERVER_ERROR(3000, false, "서버에서 오류가 발생하였습니다."),
 //    DATABASE_ERROR(3001, false, "데이터베이스에서 오류가 발생하였습니다."),
 //    BAD_SQL_GRAMMAR(3002, false, "SQL에 오류가 있습니다.");
+    BAD_FIELD_RESERVATION_CREATE_ERROR(3001, false, "필드명을 확인해주세요"),
     BAD_QS_RESTAURANT_ID_RESERVATION_ERROR(3003, false, "restaurant_id값이 유요하지 않습니다."),
     BAD_QS_DAY_RESERVATION_ERROR(3004, false, "day 파라미터가 유효하지 않습니다.");
 
