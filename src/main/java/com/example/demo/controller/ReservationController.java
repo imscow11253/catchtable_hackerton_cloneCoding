@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.base.BaseResponse;
-import com.example.demo.dto.reservation.PostReservationCreateRequest;
-import com.example.demo.dto.reservation.ReservationCreateResponse;
-import com.example.demo.dto.reservation.ReservationDayResponse;
+import com.example.demo.dto.reservation.*;
 import com.example.demo.exception.BaseException;
 import com.example.demo.service.ReservationService;
 import com.example.demo.util.JwtProvider;
@@ -35,6 +33,15 @@ public class ReservationController {
 
         ReservationDayResponse response = reservationService.reserveDay(restaurant_id, day);
         return new BaseResponse<>(response);
+    }
+
+    @GetMapping("/week")
+    public BaseResponse<GetResponseReservationWeekList> reservationAvailableDayByWeek(@RequestParam long restaurant_id, @RequestParam int week, @RequestParam int reservation_people){
+        log.info("ReservationController.reservationAvailableDayByWeek");
+
+        GetRequestReservationWeek getRequestReservationWeek = new GetRequestReservationWeek(restaurant_id, week, reservation_people);
+
+        return new BaseResponse<>(this.reservationService.reservationAvailableDayByWeek(getRequestReservationWeek));
     }
 
     @PostMapping
