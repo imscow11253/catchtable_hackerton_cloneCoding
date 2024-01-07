@@ -8,10 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +24,12 @@ public class ReservationDao {
         String sql = "SELECT t.time " +
                 "FROM time t " +
                 "INNER JOIN reservation_day rd ON t.day_id = rd.day_id " +
+
                 "WHERE rd.restaurant_id=? " +
                 "AND rd.day=? " +
                 "AND t.is_reservation='YES'";
         List<Timestamp> timestampList = jdbcTemplate.queryForList(sql, Timestamp.class,restaurant_id, date);
+
 
         // Stream을 사용하여 List<Timestamp>를 List<Integer>으로 변환
         List<Integer> hours = timestampList.stream()
@@ -94,5 +93,16 @@ public class ReservationDao {
 
         return reservation_time;
 
+    }
+
+    public Integer saveReservation(long userId, long restaurantId, Date visit_date, Time visit_time, long number_of_people, String consumer_memo){
+        log.info("ReservationDao.saveReservation");
+        String sql = "INSERT INTO reservation (member_id, restaurant_id, visit_date, visit_time, number_of_people, cosumer_memo) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        System.out.println(restaurantId);
+        jdbcTemplate.update(sql, userId, restaurantId, visit_date, visit_time, number_of_people, consumer_memo);
+
+        String select_sql = "SELECT reservation_id FROM reservation WHERE member_id=? AND restaurant_id=? AND visit_date=?";
+        return jdbcTemplate.queryForObject(select_sql, Integer.class, userId, restaurantId, visit_date);
     }
 }

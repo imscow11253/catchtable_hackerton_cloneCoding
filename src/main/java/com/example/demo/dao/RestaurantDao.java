@@ -186,6 +186,23 @@ public class RestaurantDao {
     }
 
 
+    public List<GetRestaurantName> getRestaurantName(String restaurant_name){
+        String sql = "select r.restaurant_id, r.restaurant_name, r.location, r.description, r.restaurant_img, COALESCE(ROUND(AVG(rev.rate),1), 0) as rate " +
+                "from restaurant r left join review rev on r.restaurant_id=rev.restaurant_id where r.restaurant_name like :restaurant_name "
+                +"group by r.restaurant_id, r.restaurant_name, r.location, r.description, r.restaurant_img";
+        Map<String, Object> param = Map.of("restaurant_name", "%"+restaurant_name+"%");
 
+        return jdbcTemplate.query(sql, param,
+                (rs, rowNum) -> new GetRestaurantName(
+                        rs.getInt("restaurant_id"),
+                        rs.getString("restaurant_name"),
+                        rs.getString("location"),
+                        rs.getString("description"),
+                        rs.getString("restaurant_img"),
+                        rs.getFloat("rate"))
+        );
+
+
+    }
 
 }

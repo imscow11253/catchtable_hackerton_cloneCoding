@@ -2,15 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.common.response.BaseResponse;
 import com.example.demo.dto.restaurant.GetRestaurantDetail;
+import com.example.demo.dto.restaurant.GetRestaurantName;
 import com.example.demo.dto.restaurant.GetRestaurantResponseCategory;
 import com.example.demo.dto.restaurant.GetRestaurantResponseLocation;
 import com.example.demo.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -46,5 +46,12 @@ public class RestaurantController {
         log.info("[RestaurantController.getRestaurants_Detail]");
 
         return new BaseResponse<>(restaurantService.getRestaurantDetail(restaurant_id));
+    }
+
+    @GetMapping("/{restaurant_name}")
+    public BaseResponse<List<GetRestaurantName>> getRestaurantName(
+            @PathVariable("restaurant_name") String restaurant_name
+    ){
+        return new BaseResponse<>(restaurantService.getRestaurantName(restaurant_name));
     }
 }
