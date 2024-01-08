@@ -11,6 +11,6 @@ api 명세서 (notion 페이지)
 https://flower-number-d8c.notion.site/Hackerton-Team1-API-Template-94b81b80c35b45708ef48c5b2297cbc1?pvs=4
 
 ERD (erdcloud 사이트 사용)
-https://www.erdcloud.com/d/64vGFgbjJjNoRsti6
+https://www.erdcloud.com/d/qTcAky923BR2i4gon
 
 ![image](https://github.com/KUIT-2/Hackathon_Team1-Server/assets/71692903/86c455ab-6fd5-4a46-a0ab-0bb7c35075b3)
